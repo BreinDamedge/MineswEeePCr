@@ -27,3 +27,4 @@ Host github.com
     IndentityFile ~/.ssh/<file_name>
 ```
 and now I'll see if that worked.
+nope! that gave "bad configuration option: identityfile" so I'll see what that's about. nope I wrote "Indentity" lmao.
