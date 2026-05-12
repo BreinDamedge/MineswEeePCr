@@ -14,4 +14,16 @@ YUUUSS it totally worked!!! this is also the first time I've used ssh keys for g
 now I'm going to start on the coding/architecture.
 man it's been so long since I've used c. shall we use a struct for the game state? sure!
 
+okay that went well. now I'm getting an auth error w/github. that's weird. I'll fix that tomorrow.
+real quick I'll add to my nvim config to do movement up and down between windows.
 
+It is a new day (5.12.2026)
+First I'll fix my ssh-agent config so that the github key loads and then I can actually push from this machine...
+so I added an ssh config file (~/.ssh/config) with the content:
+```
+Host github.com
+    HostName github.com
+    User git
+    IndentityFile ~/.ssh/<file_name>
+```
+and now I'll see if that worked.
