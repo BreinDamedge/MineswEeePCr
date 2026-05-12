@@ -11,6 +11,7 @@
 `:tabmove N` : moves the current tab. position is 0 indexed and when no arg is provided it moves it to the end.
 `:split` : splits horizontally
 `leader+<Down>` : move down a window (<Up>, h, l do their respective directions).
+`:e <filename>` : open's a file for editing 
 
 # Leader
 default leader key is `ctrl+w`. New windows can be made w/leader + s, or leader+v for a vertical split.

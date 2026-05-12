@@ -28,3 +28,11 @@ Host github.com
 ```
 and now I'll see if that worked.
 nope! that gave "bad configuration option: identityfile" so I'll see what that's about. nope I wrote "Indentity" lmao.
+
+I'm working on the actual board thing now and trying to print stuff with extra c files. I need to learn how to use make to build the project w/multiple files. I mean I don't need to but it'd be fun. I'll get to that later. working rn on board representation and printing everything out. the other two config things you should do are:
+- [ ] shift+space -> _
+    - this is gonna be tough so I'll leave it for later
+- [x] <C-BS> -> <C-w> (in instert mode)
+
+okay so I'm printing out the board as a silly little grid of xs atm which works. I'll have to find a better more readable method. I'll get to that in a bit.
+
