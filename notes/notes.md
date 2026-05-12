@@ -10,3 +10,8 @@ how do I alias things in bash permanently? I created a `.bash_aliases` file (in 
 alrighty so I was adding this to my github and I generated a key. I needed to share it to my other computer so that I could add it to github. I wanted a way to send it from this machine to the other so i did `curl -d "$(cat <my_key_file>)" <my_other_computers_ip>` and then I ran a python post request echoer on my other laptop which worked great for sending it.
 
 YUUUSS it totally worked!!! this is also the first time I've used ssh keys for github. this is awesome :D
+
+now I'm going to start on the coding/architecture.
+man it's been so long since I've used c. shall we use a struct for the game state? sure!
+
+
