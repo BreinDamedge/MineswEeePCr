@@ -45,3 +45,8 @@ Still fighting the dang seg fault. it is being triggered when I access the rows 
 
 hey uh... when you uh- when you malloc a board you should uh- you should return the pointer you just alloced. like- not returning anything from a function that returns something should def be an error or like a warning but by default I guess not.
 
+You should make the board data a contiguous 1d array and index into it w/ the rc trick bc it's just better. you should fix this dealloc error first probably so you can figure out what it is but honestly who cares just do the 1d and fix the bug if it's still there. also- what was it oh yeah, you should learn how to use macros even though you should avoid them (I hear they're evil) but also they might be useful one day. you might be able to make a macro for the rc math for indexing into a 2d array but might as well just type it out. also you've been told to make the bar str not a variable length array (VLA) bc they're "weird" so you should read about why they're weird, and until then just use a static 2048 char array and don't support boards bigger than 1k^2 bc the EeePC is a potato anyway.
+
+also uh good reminder: don't go optimization crazy. this is your first draft. and it's minesweeper.
+
+yeah the invalid pointer bug is inconsistant. I'm not checking that the mallocs succeed so maybe it's that? probably not tho. I'll make the thing a single buffer.

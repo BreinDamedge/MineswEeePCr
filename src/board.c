@@ -1,11 +1,13 @@
 #include "board.h"
 #include <stdio.h>
 #include <stdlib.h>
+#define MAX_BAR 2048
 
 void PrintBoard(Board* b_) {
     // make the bar
     int barLen = b_->cols*(2)+3;
-    char bar[barLen];   // needs to be null terminated
+    if (barLen > MAX_BAR) { printf("BOARD OVER MAX EXPECTED SIZE!!!\n"); }
+    char bar[MAX_BAR];   // needs to be null terminated
     for (int c = 0; c < barLen; c+=2) {
         bar[c]   = '+';
         bar[c+1] = '-';
@@ -23,7 +25,7 @@ void PrintBoard(Board* b_) {
             if ((r+c)%2) {
                 printf(".|");
             } else {
-                printf("o|");
+                printf("X|");
             }
         }
         printf("\n");
@@ -39,22 +41,18 @@ Board* MakeBoard(int r_, int c_, int numBombs_) {
     newBoard->cols = c_;
 
     // allocate the 2darray
-    // TODO: redo this as contiguos memory
-    newBoard->counts = malloc(sizeof(int*)*r_);
-
-    for (int r = 0; r < r_; r++) {
-        newBoard->counts[r] = calloc(sizeof(int)*c_, 0);
-    }
+    newBoard->counts = malloc(sizeof(int)*r_*c_);   // for best practice you'd check this pointer. can't remember what you're supposed to do if it fails tho. you'd clean up as best you could and then shutdown the program probably. you could retry. doesn't matter rn tho.
+    for (int i = 0; i<r_*c_; i++) { newBoard->counts[i] = 0; }
 
     // assign bombs
+    int r, c;
     for (int _ = 0; _ < numBombs_; _++) {
         // random x & y
-        int r, c;
         r = rand() % r_;
         c = rand() % c_;
 
         // set bomb pos in grid to -1
-        newBoard->counts[r][c] = -1;
+        newBoard->counts[r*c_+c] = -1;
     }
 
     return newBoard;
@@ -63,10 +61,6 @@ Board* MakeBoard(int r_, int c_, int numBombs_) {
 
 void FreeBoard(Board** b_) {
     Board* b = *b_;
-    for (int r = 0; r < b->rows; r++) {
-        printf("there's a bug in here :]\n");
-        free(b->counts[r]);
-    }
     free(b->counts);
     free(b);
     b = NULL;

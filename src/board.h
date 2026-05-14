@@ -1,5 +1,5 @@
 typedef struct {
-    int rows, cols, **counts;
+    int rows, cols, *counts;
 } Board;
 
 void PrintBoard(Board* b_);
