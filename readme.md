@@ -1,13 +1,10 @@
 hi.
 
-the plan is to make minesweeper in the terminal in c on this thing, and then make a bot to play it. once that's done I can copy it onto a flashdrive and put it on another computer and then upload it to github. should I install git here for this project? probably. we'll see.
+I got a silly laptop from a thrift store. It's an EeePC 1000HE with a bonkers single core 1.6 ghz cpu and a staggering 2 gigs of ram. I'm gonna code on it.
+
+The plan is to make minesweeper in the terminal in c on this thing, and then make a bot to play it.
 
 # Minesweeper
-so we're gonna make minesweeper right? how are we gonna do that? do we want to support different sized boards? yeah we do- man this keyboard is teeny tiny. this will probably make my joints act up oh well. 
-So minesweeper. I'm going to write this in c.
+There'll be more to read here as the project develops.
 
-so there's the main game loop which I think I'll start w/human me playing the game. if I'm writing this in C I'm only going to worry about a single board instance. in minesweeper you can put a flag, you can dig, or there can be a block or nothing there.
-
-## Steps
-- [ ] make a board
-
+\*max size to be tested is 1000 x 1000 spaces (larger may work but I won't be testing also who's terminal is that big?).
