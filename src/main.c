@@ -3,16 +3,22 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "board.h"
 
 int main() {
     printf("hello world!\n");
+    srand(time(NULL));
 
-    Board b;
-    b.rows = 5;
-    b.cols = 4;
-    printf("rows: %i\ncols: %i\n", b.rows, b.cols);
-    PrintBoard(&b);
+    Board* b = MakeBoard(5, 4, 10);
+    if (!b) {
+        printf("b address is null, exiting.\n");
+        return 1;
+    }
+
+    printf("rows: %i\ncols: %i\n", b->rows, b->cols);
+    PrintBoard(b);
 
     // initialize the board
     // loop
@@ -20,8 +26,6 @@ int main() {
     // get user input
     // mark/break spot
 
-
-
-
+    FreeBoard(&b);
     return 0;
 }

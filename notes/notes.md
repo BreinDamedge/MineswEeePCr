@@ -36,3 +36,12 @@ I'm working on the actual board thing now and trying to print stuff with extra c
 
 okay so I'm printing out the board as a silly little grid of xs atm which works. I'll have to find a better more readable method. I'll get to that in a bit.
 
+
+now I need to design the board struct.
+# Board Data
+so the board has it's rows and columns, and it needs to know where all the bombs are. so bombs need to be... bombs can be kept track of as... oh, just make the board a 2d array of ints. -1 is a bomb and all the other numbers are a count. This could be a good excuse to learn to use an enum.
+
+Still fighting the dang seg fault. it is being triggered when I access the rows element at least. so it's not actually my freeing situation. very strange. might learn to use gdb, that or I'll just tinker. I'm in the car right now so I'll have to just tinker about.
+
+hey uh... when you uh- when you malloc a board you should uh- you should return the pointer you just alloced. like- not returning anything from a function that returns something should def be an error or like a warning but by default I guess not.
+
