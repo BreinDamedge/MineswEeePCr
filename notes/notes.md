@@ -50,3 +50,5 @@ You should make the board data a contiguous 1d array and index into it w/ the rc
 also uh good reminder: don't go optimization crazy. this is your first draft. and it's minesweeper.
 
 yeah the invalid pointer bug is inconsistant. I'm not checking that the mallocs succeed so maybe it's that? probably not tho. I'll make the thing a single buffer.
+
+was gonna make a whole function to find the width of the numbers to be printed but the largest that a number can be for bomb count is 9 which is still one digit which is less than -1 so just make it two wide. actually make it 1 wide and just print bs in the bombs

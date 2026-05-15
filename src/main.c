@@ -8,7 +8,6 @@
 #include "board.h"
 
 int main() {
-    printf("hello world!\n");
     srand(time(NULL));
 
     // initialize the board
@@ -18,11 +17,10 @@ int main() {
         return 1;
     }
 
-    // printf("rows: %i\ncols: %i\n", b->rows, b->cols);
-    PrintBoard(b);
 
     // loop
     // display it (figure that out)
+    PrintBoard(b);
     // get user input
     // mark/break spot
 

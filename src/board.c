@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #define MAX_BAR 2048
 
+
+
+
 void PrintBoard(Board* b_) {
     // make the bar
     int barLen = b_->cols*(2)+3;
@@ -22,7 +25,9 @@ void PrintBoard(Board* b_) {
         printf("|");
         for (int c = 0; c < b_->cols; c++) {
             // checkered appearance
-            if ((r+c)%2) {
+            if (b_->counts[b_->cols*r+c] == -1) {
+                printf("B|");
+            } else if ((r+c)%2) {
                 printf(".|");
             } else {
                 printf("X|");
