@@ -11,7 +11,7 @@ int main() {
     srand(time(NULL));
 
     // initialize the board
-    Board* b = MakeBoard(10, 10, 20);
+    Board* b = MakeBoard(8, 10, 20);
     if (!b) {
         printf("b address is null, exiting.\n");
         return 1;

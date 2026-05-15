@@ -51,4 +51,6 @@ also uh good reminder: don't go optimization crazy. this is your first draft. an
 
 yeah the invalid pointer bug is inconsistant. I'm not checking that the mallocs succeed so maybe it's that? probably not tho. I'll make the thing a single buffer.
 
-was gonna make a whole function to find the width of the numbers to be printed but the largest that a number can be for bomb count is 9 which is still one digit which is less than -1 so just make it two wide. actually make it 1 wide and just print bs in the bombs
+was gonna make a whole function to find the width of the numbers to be printed but the largest that a number can be for bomb count is 9 which is still one digit which is less than -1 so just make it two wide. actually make it 1 wide and just print bs in the bombs. 
+
+counting is complete now I think. now it also checks in bomb placement if you put a bomb where one already was and it adds an iteration to the for loop.

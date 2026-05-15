@@ -24,14 +24,19 @@ void PrintBoard(Board* b_) {
     for (int r = 0; r < b_->rows; r++) {
         printf("|");
         for (int c = 0; c < b_->cols; c++) {
-            // checkered appearance
+            // printing counts
             if (b_->counts[b_->cols*r+c] == -1) {
                 printf("B|");
-            } else if ((r+c)%2) {
-                printf(".|");
             } else {
-                printf("X|");
+                printf("%i|", b_->counts[r*b_->cols+c]);
             }
+
+            // checkered appearance
+            // if ((r+c)%2) {
+            //     printf(".|");
+            // } else {
+            //     printf("X|");
+            // }
         }
         printf("\n");
         printf("%s", bar);
@@ -57,7 +62,24 @@ Board* MakeBoard(int r_, int c_, int numBombs_) {
         c = rand() % c_;
 
         // set bomb pos in grid to -1
+        if (newBoard->counts[r*c_+c] == -1) {_--; } // add another loop bc ur a bozo
         newBoard->counts[r*c_+c] = -1;
+    }
+
+    // counts
+    for (int r = 0; r < r_; r++) {
+        for (int c = 0; c < c_; c++) {
+            if (newBoard->counts[r*c_+c] == -1) { continue; }
+            for (int ro = -1; ro < 2; ro++) {
+                for (int co = -1; co < 2; co++) {
+                    if (r+ro >= 0 && c+co >= 0 && r+ro < r_ && c+co < c_) {
+                        if (newBoard->counts[(r+ro)*c_+(c+co)]==-1 && newBoard->counts[r*c_+c] != -1) {
+                            newBoard->counts[r*c_+c]++;
+                        }
+                    }
+                }
+            }
+       }
     }
 
     return newBoard;
