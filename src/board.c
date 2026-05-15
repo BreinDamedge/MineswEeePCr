@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX_BAR 2048
-
+#define BOMB -1
 
 
 
@@ -25,7 +25,7 @@ void PrintBoard(Board* b_) {
         printf("|");
         for (int c = 0; c < b_->cols; c++) {
             // printing counts
-            if (b_->counts[b_->cols*r+c] == -1) {
+            if (b_->counts[b_->cols*r+c] == BOMB) {
                 printf("B|");
             } else {
                 printf("%i|", b_->counts[r*b_->cols+c]);
@@ -61,19 +61,19 @@ Board* MakeBoard(int r_, int c_, int numBombs_) {
         r = rand() % r_;
         c = rand() % c_;
 
-        // set bomb pos in grid to -1
-        if (newBoard->counts[r*c_+c] == -1) {_--; } // add another loop bc ur a bozo
-        newBoard->counts[r*c_+c] = -1;
+        // set bomb pos in grid to BOMB
+        if (newBoard->counts[r*c_+c] == BOMB) {_--; } // add another loop bc ur a bozo
+        else { newBoard->counts[r*c_+c] = BOMB; }
     }
 
     // counts
     for (int r = 0; r < r_; r++) {
         for (int c = 0; c < c_; c++) {
-            if (newBoard->counts[r*c_+c] == -1) { continue; }
-            for (int ro = -1; ro < 2; ro++) {
-                for (int co = -1; co < 2; co++) {
+            if (newBoard->counts[r*c_+c] == BOMB) { continue; }
+            for (int ro = BOMB; ro < 2; ro++) {
+                for (int co = BOMB; co < 2; co++) {
                     if (r+ro >= 0 && c+co >= 0 && r+ro < r_ && c+co < c_) {
-                        if (newBoard->counts[(r+ro)*c_+(c+co)]==-1 && newBoard->counts[r*c_+c] != -1) {
+                        if (newBoard->counts[(r+ro)*c_+(c+co)] == BOMB && newBoard->counts[r*c_+c] != BOMB) {
                             newBoard->counts[r*c_+c]++;
                         }
                     }

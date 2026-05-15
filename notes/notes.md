@@ -54,3 +54,7 @@ yeah the invalid pointer bug is inconsistant. I'm not checking that the mallocs 
 was gonna make a whole function to find the width of the numbers to be printed but the largest that a number can be for bomb count is 9 which is still one digit which is less than -1 so just make it two wide. actually make it 1 wide and just print bs in the bombs. 
 
 counting is complete now I think. now it also checks in bomb placement if you put a bomb where one already was and it adds an iteration to the for loop.
+
+I should add an enum for bomb, and also flag except that the flag enum will go with the dirt & empty enums in the display/occupation grid thingy... that needs a name ig.
+
+you made the enum and then you played a bunch of minesweeper.
