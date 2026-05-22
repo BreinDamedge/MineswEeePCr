@@ -3,6 +3,7 @@ hi.
 I got a silly laptop from a thrift store. It's an EeePC 1000HE with a bonkers single core 1.6 ghz cpu and a staggering 2 gigs of ram. I'm gonna code on it.
 
 The plan is to make minesweeper in the terminal in c on this thing, and then make a bot to play it.
+This is also a lovely opportunity to learn Neovim without a starting config.
 
 # Minesweeper
 There'll be more to read here as the project develops.

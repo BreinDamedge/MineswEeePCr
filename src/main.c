@@ -1,4 +1,4 @@
-/* 5.11.2026 - MineswEeePCr
+/* 5.11.2026 - MineswEeePCr - main.c
  * here's our lovely little minesweeper project
  */
 

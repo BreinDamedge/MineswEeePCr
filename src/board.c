@@ -6,6 +6,7 @@
 
 
 
+
 void PrintBoard(Board* b_) {
     // make the bar
     int barLen = b_->cols*(2)+3;
@@ -51,8 +52,12 @@ Board* MakeBoard(int r_, int c_, int numBombs_) {
     newBoard->cols = c_;
 
     // allocate the 2darray
+    newBoard->dug = malloc(sizeof(bool)*r_*c_);
     newBoard->counts = malloc(sizeof(int)*r_*c_);   // for best practice you'd check this pointer. can't remember what you're supposed to do if it fails tho. you'd clean up as best you could and then shutdown the program probably. you could retry. doesn't matter rn tho.
-    for (int i = 0; i<r_*c_; i++) { newBoard->counts[i] = 0; }
+    for (int i = 0; i<r_*c_; i++) {
+        newBoard->counts[i] = 0;
+        newBoard->dug[i] = false;
+    }
 
     // assign bombs
     int r, c;

@@ -1,5 +1,7 @@
+typedef enum { false, true } bool;
 typedef struct {
     int rows, cols, *counts;
+    bool *dug;
 } Board;
 
 typedef enum {EMPTY, DIRT, FLAG} TileStatus;

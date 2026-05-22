@@ -58,3 +58,5 @@ counting is complete now I think. now it also checks in bomb placement if you pu
 I should add an enum for bomb, and also flag except that the flag enum will go with the dirt & empty enums in the display/occupation grid thingy... that needs a name ig.
 
 you made the enum and then you played a bunch of minesweeper.
+
+next thing to do is mark spots as displayable.

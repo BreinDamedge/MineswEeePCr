@@ -17,6 +17,7 @@
 # Leader
 default leader key is `ctrl+w`. New windows can be made w/leader + s, or leader+v for a vertical split.
 
+
 # config things
 to find your config file you can run `:echo stdpath('config')` (shoutout that youtube series).
 your config file is located at `/home/brein/.config/nvim`, and the file is init.lua
@@ -27,3 +28,7 @@ you should figure out how to change your leader key to space
 so I didn't change my leader key, I changed my window commands "leader" thing from <C-w> to <Space>w. also added the <S-h> and <S-l> to move between windows.
 
 - you made `<Space>e` open a new window and the explorer
+
+## netrw
+uhnide dotfiles with `gh`
+
