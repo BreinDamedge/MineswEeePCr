@@ -1,13 +1,19 @@
 typedef enum { false, true } bool;
+typedef enum { dirt, dug, flag } tileState;
+
 typedef struct {
     int rows, cols, *counts;
-    bool *dug;
+    tileState *state;
 } Board;
 
-typedef enum {EMPTY, DIRT, FLAG} TileStatus;
 
 void PrintBoard(Board* b_);
 
 Board* MakeBoard(int r_, int c_, int numBombs_);
 
 void FreeBoard(Board** b_);
+
+int Dig(Board* b_, int r_, int c_);
+
+void Reveal(Board* b_);
+

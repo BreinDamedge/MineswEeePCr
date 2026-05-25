@@ -26,18 +26,25 @@ void PrintBoard(Board* b_) {
         printf("|");
         for (int c = 0; c < b_->cols; c++) {
             // printing counts
-            if (b_->counts[b_->cols*r+c] == BOMB) {
-                printf("B|");
+            if (b_->state[b_->cols*r+c] == dug) {
+                if (b_->counts[b_->cols*r+c] == BOMB) {
+                    printf("B|");
+                } else {
+                    if (b_->counts[r*b_->cols+c]) {
+                        printf("%i|", b_->counts[r*b_->cols+c]);
+                    } else {
+                        printf(" |");
+                    }
+                }
             } else {
-                printf("%i|", b_->counts[r*b_->cols+c]);
+                // checkered appearance
+                if ((r+c)%2) {
+                    printf(".|");
+                } else {
+                    printf("X|");
+                }
             }
 
-            // checkered appearance
-            // if ((r+c)%2) {
-            //     printf(".|");
-            // } else {
-            //     printf("X|");
-            // }
         }
         printf("\n");
         printf("%s", bar);
@@ -52,11 +59,11 @@ Board* MakeBoard(int r_, int c_, int numBombs_) {
     newBoard->cols = c_;
 
     // allocate the 2darray
-    newBoard->dug = malloc(sizeof(bool)*r_*c_);
+    newBoard->state = malloc(sizeof(tileState)*r_*c_);
     newBoard->counts = malloc(sizeof(int)*r_*c_);   // for best practice you'd check this pointer. can't remember what you're supposed to do if it fails tho. you'd clean up as best you could and then shutdown the program probably. you could retry. doesn't matter rn tho.
     for (int i = 0; i<r_*c_; i++) {
         newBoard->counts[i] = 0;
-        newBoard->dug[i] = false;
+        newBoard->state[i] = dirt;
     }
 
     // assign bombs
@@ -96,5 +103,19 @@ void FreeBoard(Board** b_) {
     free(b->counts);
     free(b);
     b = NULL;
+}
+
+
+// modify the state val at r_ c_. return 0 unless you dug a bomb, then return 1
+int Dig(Board* b_, int r_, int c_) {
+    b_->state[b_->cols*r_+c_] = dug;
+    return b_->counts[b_->cols*r_+c_] == BOMB;
+}
+
+
+void Reveal(Board* b_) {
+    for (int i = 0; i < b_->rows*b_->cols; i++) {
+        b_->state[i] = dug;
+    }
 }
 

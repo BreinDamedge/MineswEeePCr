@@ -60,3 +60,11 @@ I should add an enum for bomb, and also flag except that the flag enum will go w
 you made the enum and then you played a bunch of minesweeper.
 
 next thing to do is mark spots as displayable.
+
+haven't worked on this in a while. okay so now I have the `state` attribute of the board struct which holds the state of a space. it's an enum so it stores it as either dirt, dug, or flag, and that's used to figure out how to display it when printing. bombs are still -1 (defined w/BOMB) in the counts array.
+
+A simple game loop is going now, so you can dig spaces. next things to add are:
+- [ ] flag placing
+- [ ] clear connected spaces w/count == 0
+- [ ] 
+

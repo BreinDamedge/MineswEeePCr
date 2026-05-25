@@ -6,21 +6,47 @@
 #include <stdlib.h>
 #include <time.h>
 #include "board.h"
+#include <unistd.h> // sleep
+
+
+
+
+void clearScreen() {
+    // \033[H moves cursor to top-left; \033[J clears the screen
+    printf("\033[H\033[J");
+}
+
 
 int main() {
     srand(time(NULL));
+    // get board size
+    int R,C;
+    // printf("board size (rows cols)\n");
+    // scanf("%d %d", &R, &C);
 
     // initialize the board
-    Board* b = MakeBoard(8, 10, 20);
+    Board* b = MakeBoard(10, 10, 10);
     if (!b) {
         printf("b address is null, exiting.\n");
         return 1;
     }
 
-
     // loop
     // display it (figure that out)
-    PrintBoard(b);
+    while (true) {
+        clearScreen();
+        PrintBoard(b);
+        scanf("%d %d", &R, &C);
+        // TODO bounds check
+        if (Dig(b, R, C)) {
+            Reveal(b);
+            clearScreen();
+            printf("You Lose :[\n");
+            PrintBoard(b);
+            break;
+        }
+    }
+
     // get user input
     // mark/break spot
 
