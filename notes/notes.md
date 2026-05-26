@@ -66,5 +66,6 @@ haven't worked on this in a while. okay so now I have the `state` attribute of t
 A simple game loop is going now, so you can dig spaces. next things to add are:
 - [ ] flag placing
 - [ ] clear connected spaces w/count == 0
-- [ ] 
+- [ ] tuibox? to add tui functionality at the end of the project.
 
+oh my goodness!!! I forgot to add line numbers to my config!!!

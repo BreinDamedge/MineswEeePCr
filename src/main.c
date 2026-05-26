@@ -38,7 +38,7 @@ int main() {
         PrintBoard(b);
         scanf("%d %d", &R, &C);
         // TODO bounds check
-        if (Dig(b, R, C)) {
+        if (Mark(b, R, C)) {
             Reveal(b);
             clearScreen();
             printf("You Lose :[\n");

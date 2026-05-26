@@ -8,6 +8,10 @@
 
 
 void PrintBoard(Board* b_) {
+    // print the header --
+    printf("Flags: %d\n", b_->flags);
+
+    // print the grid --
     // make the bar
     int barLen = b_->cols*(2)+3;
     if (barLen > MAX_BAR) { printf("BOARD OVER MAX EXPECTED SIZE!!!\n"); }
@@ -18,9 +22,6 @@ void PrintBoard(Board* b_) {
     }
     bar[barLen-2] = '\n';
     bar[barLen-1] = 0;
-
-    // print the grid
-    // TODO: state of squares affecting print out
     printf("%s", bar);
     for (int r = 0; r < b_->rows; r++) {
         printf("|");
@@ -36,6 +37,8 @@ void PrintBoard(Board* b_) {
                         printf(" |");
                     }
                 }
+            } else if (b_->state[b_->cols*r+c] == flag) {
+                printf("F|");
             } else {
                 // checkered appearance
                 if ((r+c)%2) {
@@ -55,8 +58,10 @@ void PrintBoard(Board* b_) {
 Board* MakeBoard(int r_, int c_, int numBombs_) {
     Board* newBoard = malloc(sizeof(Board));
     if (!newBoard) { return NULL; }
-    newBoard->rows = r_;
-    newBoard->cols = c_;
+    newBoard->rows  = r_;
+    newBoard->cols  = c_;
+    newBoard->bombs = numBombs_;
+    newBoard->flags = numBombs_;
 
     // allocate the 2darray
     newBoard->state = malloc(sizeof(tileState)*r_*c_);
@@ -112,6 +117,22 @@ int Dig(Board* b_, int r_, int c_) {
     return b_->counts[b_->cols*r_+c_] == BOMB;
 }
 
+
+// modify the state val at r_ c_ to add a flag. return 0 unless you are out of flags
+int Mark(Board* b_, int r_, int c_) {
+    if (b_->state[b_->cols*r_+c_] == flag) {
+        b_->flags++;
+        b_->state[b_->cols*r_+c_] = dirt;
+        return 0;
+    } else {
+        if (b_->flags > 0) {
+            b_->flags--;
+            b_->state[b_->cols*r_+c_] = flag;
+            return 0;
+        }
+    }
+    return 1;
+}
 
 void Reveal(Board* b_) {
     for (int i = 0; i < b_->rows*b_->cols; i++) {
