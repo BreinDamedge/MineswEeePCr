@@ -69,3 +69,6 @@ A simple game loop is going now, so you can dig spaces. next things to add are:
 - [ ] tuibox? to add tui functionality at the end of the project.
 
 oh my goodness!!! I forgot to add line numbers to my config!!!
+
+> [!Note]
+> connecting to wifi: `nmtui` is your command
