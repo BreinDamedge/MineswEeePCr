@@ -21,6 +21,7 @@ int main() {
     srand(time(NULL));
     // get board size
     int R,C;
+    char M;
     // printf("board size (rows cols)\n");
     // scanf("%d %d", &R, &C);
 
@@ -36,19 +37,27 @@ int main() {
     while (true) {
         clearScreen();
         PrintBoard(b);
-        scanf("%d %d", &R, &C);
+
+        // get user input
+        scanf("%c %d %d", &M, &R, &C);
         // TODO bounds check
-        if (Mark(b, R, C)) {
-            Reveal(b);
-            clearScreen();
-            printf("You Lose :[\n");
-            PrintBoard(b);
-            break;
-        }
+        // mark/dig spot
+        if (M == 'm') {
+            if (Mark(b, R, C)) {
+                // ur out of flags
+            }
+        } else if (M == 'd') {
+            if (Dig(b, R, C)) {
+                Reveal(b);
+                clearScreen();
+                printf("You Lose :[\n");
+                PrintBoard(b);
+                break;
+            }
+        } 
+        
     }
 
-    // get user input
-    // mark/break spot
 
     FreeBoard(&b);
     return 0;

@@ -72,3 +72,13 @@ oh my goodness!!! I forgot to add line numbers to my config!!!
 
 > [!Note]
 > connecting to wifi: `nmtui` is your command
+
+# Human Gameplay
+okay so the game loop is probably going to be switching modes. you'll either be in dig mode or flag mode.
+## Dig Mode
+when you're in dig mode, you input r c and that coordinate get's dug. if you dig an already dug spot w/the correct number of flags around it, it will clear all of the non dug non flaged spots.
+## mark mode
+when you're in mark mode, you can place or remove flags
+
+## switching modes
+you should do some cool string parsing where you type "mark" or "m" or smth or "d" and then if you- wait, ig you could just stay in one mode or the other and just do like "m 0 0" would mark 0 0. cool do that for now.

@@ -113,6 +113,10 @@ void FreeBoard(Board** b_) {
 
 // modify the state val at r_ c_. return 0 unless you dug a bomb, then return 1
 int Dig(Board* b_, int r_, int c_) {
+    if (b_->state[b_->cols*r_+c_] == flag) {
+        // TODO some message to let you know that you've dug a spot that's already flagged
+        return 0;
+    }
     b_->state[b_->cols*r_+c_] = dug;
     return b_->counts[b_->cols*r_+c_] == BOMB;
 }
