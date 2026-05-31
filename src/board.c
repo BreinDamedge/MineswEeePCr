@@ -109,6 +109,7 @@ void InitializeBombs(Board* b_, int r0_, int c0_) {
    b_->state[r0_*b_->cols+c0_] = dug;
    // mark the bombs as initialized
    b_->bombed = true;
+   if (b_->counts[r0_*b_->cols+c0_] == 0) { ClearEmpty(b_, r0_, c0_); }
 }
 
 
@@ -127,6 +128,7 @@ int Dig(Board* b_, int r_, int c_) {
         return 0;
     }
     b_->state[b_->cols*r_+c_] = dug;
+    if (b_->counts[b_->cols*r_+c_] == 0 ) { ClearEmpty(b_, r_, c_); }
     return b_->counts[b_->cols*r_+c_] == BOMB;
 }
 
@@ -145,6 +147,24 @@ int Mark(Board* b_, int r_, int c_) {
         }
     }
     return 1;
+}
+
+
+void ClearEmpty(Board* b_, int r_, int c_) {
+    // only enter this function if counts at r_ c_ is 0
+    // loop through neighbors
+    for (int ro = -1; ro < 2; ro++) {
+        for (int co = -1; co < 2; co++) {
+            if (ro == 0 && co == 0) { continue; }   // ur back on this square so skip
+            // if neighbor is in bounds
+            if (r_+ro >= 0 && c_+co >= 0 && r_+ro < b_->rows && c_+co < b_->cols) {
+                // dig it
+                b_->state[(r_+ro)*b_->cols+(c_+co)] = dug;
+                // recurse if needed
+                if (b_->counts[(r_+ro)*b_->cols+(c_+co)] == 0) { ClearEmpty(b_, r_+ro, c_+co); }
+            }
+        }
+    }
 }
 
 void Reveal(Board* b_) {

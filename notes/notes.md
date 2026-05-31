@@ -93,4 +93,17 @@ actually nevermind. I'm going to make an `InitializeBombs()` function instead. I
 alroighty the bomb initialization is working so I'll check that off the list.
 
 Next is to clear all the positions which are neighboring and empty. how will we do that? could use recursion, I'd rather use a stack and a while loop. first I'm going to add the date time to my nvim config and add that to the repo.
+I'll think it through here:
+```
+you can start at your rc
+check the neighbors (4 or 8, do 8)
+for each neighbor
+    if it's on the board
+        clear it (dig)
+        if its count is 0 and it isn't dug:
+            add it to the stack as a new center
 
+```
+start w/recurrsion bc it's easier to implement, then make it fast w/a stack if you care.
+TODO: fix bug where no clear on initial break bc the bombs aren't placed yet. (trigger ClearEmpty() in initialize board should do the trick)
+okie dokie I "fixed it" but now I'm seg faulting.

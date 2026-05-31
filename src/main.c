@@ -54,7 +54,7 @@ int main() {
                     printf("You Lose :[\n");
                     PrintBoard(b);
                     break;
-                }
+                } 
             } else {
                 InitializeBombs(b, R, C);
             }

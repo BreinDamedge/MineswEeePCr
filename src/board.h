@@ -18,6 +18,7 @@ void FreeBoard(Board** b_);
 
 int Dig(Board* b_, int r_, int c_);
 int Mark(Board* b_, int r_, int c_);
+void ClearEmpty(Board* b_, int r_, int c_);
 
 void Reveal(Board* b_);
 
