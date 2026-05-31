@@ -12,17 +12,7 @@ void PrintBoard(Board* b_) {
     printf("Flags: %d\n", b_->flags);
 
     // print the grid --
-    // make the bar
-    int barLen = b_->cols*(2)+3;
-    if (barLen > MAX_BAR) { printf("BOARD OVER MAX EXPECTED SIZE!!!\n"); }
-    char bar[MAX_BAR];   // needs to be null terminated
-    for (int c = 0; c < barLen; c+=2) {
-        bar[c]   = '+';
-        bar[c+1] = '-';
-    }
-    bar[barLen-2] = '\n';
-    bar[barLen-1] = 0;
-    printf("%s", bar);
+    printf("%s", b_->bar);
     for (int r = 0; r < b_->rows; r++) {
         printf("|");
         for (int c = 0; c < b_->cols; c++) {
@@ -50,7 +40,7 @@ void PrintBoard(Board* b_) {
 
         }
         printf("\n");
-        printf("%s", bar);
+        printf("%s", b_->bar);
     }
 }
 
@@ -62,6 +52,17 @@ Board* MakeBoard(int r_, int c_, int numBombs_) {
     newBoard->cols  = c_;
     newBoard->bombs = numBombs_;
     newBoard->flags = numBombs_;
+    newBoard->bombed = false;
+
+    // make the bar (used in PrintBoard()
+    int barLen = c_*(2)+3;
+    newBoard->bar = malloc(sizeof(char)*barLen);
+    for (int c = 0; c < barLen; c+=2) {
+        newBoard->bar[c]   = '+';
+        newBoard->bar[c+1] = '-';
+    }
+    newBoard->bar[barLen-2] = '\n';
+    newBoard->bar[barLen-1] = 0;
 
     // allocate the 2darray
     newBoard->state = malloc(sizeof(tileState)*r_*c_);
@@ -70,36 +71,44 @@ Board* MakeBoard(int r_, int c_, int numBombs_) {
         newBoard->counts[i] = 0;
         newBoard->state[i] = dirt;
     }
+    
+    return newBoard;
+}
 
-    // assign bombs
+
+// r/c0_ are the location of the first broken spot.
+void InitializeBombs(Board* b_, int r0_, int c0_) {
     int r, c;
-    for (int _ = 0; _ < numBombs_; _++) {
+    for (int _ = 0; _ < b_->bombs; _++) {
         // random x & y
-        r = rand() % r_;
-        c = rand() % c_;
+        r = rand() % b_->rows;
+        c = rand() % b_->cols;
 
         // set bomb pos in grid to BOMB
-        if (newBoard->counts[r*c_+c] == BOMB) {_--; } // add another loop bc ur a bozo
-        else { newBoard->counts[r*c_+c] = BOMB; }
+        if ( b_->counts[r*b_->cols+c] == BOMB || (r == r0_ && c == c0_) ) {_--; } // add another loop bc ur a bozo (placed a bomb where one exists, or in the initially cleared spot)
+        else { b_->counts[r*b_->cols+c] = BOMB; }
     }
 
     // counts
-    for (int r = 0; r < r_; r++) {
-        for (int c = 0; c < c_; c++) {
-            if (newBoard->counts[r*c_+c] == BOMB) { continue; }
+    for (int r = 0; r < b_->rows; r++) {
+        for (int c = 0; c < b_->cols; c++) {
+            if (b_->counts[r*b_->cols+c] == BOMB) { continue; }
             for (int ro = BOMB; ro < 2; ro++) {
                 for (int co = BOMB; co < 2; co++) {
-                    if (r+ro >= 0 && c+co >= 0 && r+ro < r_ && c+co < c_) {
-                        if (newBoard->counts[(r+ro)*c_+(c+co)] == BOMB && newBoard->counts[r*c_+c] != BOMB) {
-                            newBoard->counts[r*c_+c]++;
+                    if (r+ro >= 0 && c+co >= 0 && r+ro < b_->rows && c+co < b_->cols) {
+                        if (b_->counts[(r+ro)*b_->cols+(c+co)] == BOMB && b_->counts[r*b_->cols+c] != BOMB) {
+                            b_->counts[r*b_->cols+c]++;
                         }
                     }
                 }
             }
-       }
+        }
     }
 
-    return newBoard;
+   // mark r/c0 as dug 
+   b_->state[r0_*b_->cols+c0_] = dug;
+   // mark the bombs as initialized
+   b_->bombed = true;
 }
 
 

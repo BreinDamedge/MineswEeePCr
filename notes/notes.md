@@ -64,8 +64,10 @@ next thing to do is mark spots as displayable.
 haven't worked on this in a while. okay so now I have the `state` attribute of the board struct which holds the state of a space. it's an enum so it stores it as either dirt, dug, or flag, and that's used to figure out how to display it when printing. bombs are still -1 (defined w/BOMB) in the counts array.
 
 A simple game loop is going now, so you can dig spaces. next things to add are:
-- [ ] flag placing
+# TODO
+- [x] flag placing
 - [ ] clear connected spaces w/count == 0
+- [x] initialize board after first break to make sure you don't break a bomb on your first move
 - [ ] tuibox? to add tui functionality at the end of the project.
 
 oh my goodness!!! I forgot to add line numbers to my config!!!
@@ -80,5 +82,15 @@ when you're in dig mode, you input r c and that coordinate get's dug. if you dig
 ## mark mode
 when you're in mark mode, you can place or remove flags
 
-## switching modes
+## switching modes (*there aren't actually modes)
 you should do some cool string parsing where you type "mark" or "m" or smth or "d" and then if you- wait, ig you could just stay in one mode or the other and just do like "m 0 0" would mark 0 0. cool do that for now.
+
+# 5.31.2026
+ig this is kind of a devlog. I should put my nvim config in this repo. I'm gonna change the code so that the bar getting printed is allocated once at startup. Also changing it to only populate the board after the first spot has been cleared to make sure you don't have a death on turn 1. to do this I'll make a `PrintBoardFacade()` function that just prints a fake board before the game is begun, and change the function that populates the bombs (MakeBoard()) to also take the initial break position so that it doesn't put a bomb there.
+
+actually nevermind. I'm going to make an `InitializeBombs()` function instead. I'll just separate the bomb counts code from the rest of the code.
+
+alroighty the bomb initialization is working so I'll check that off the list.
+
+Next is to clear all the positions which are neighboring and empty. how will we do that? could use recursion, I'd rather use a stack and a while loop. first I'm going to add the date time to my nvim config and add that to the repo.
+

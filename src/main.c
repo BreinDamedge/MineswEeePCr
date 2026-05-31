@@ -47,13 +47,18 @@ int main() {
                 // ur out of flags
             }
         } else if (M == 'd') {
-            if (Dig(b, R, C)) {
-                Reveal(b);
-                clearScreen();
-                printf("You Lose :[\n");
-                PrintBoard(b);
-                break;
+            if (b->bombed){
+                if (Dig(b, R, C)) {
+                    Reveal(b);
+                    clearScreen();
+                    printf("You Lose :[\n");
+                    PrintBoard(b);
+                    break;
+                }
+            } else {
+                InitializeBombs(b, R, C);
             }
+            
         } 
         
     }
