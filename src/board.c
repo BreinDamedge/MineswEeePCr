@@ -158,10 +158,13 @@ void ClearEmpty(Board* b_, int r_, int c_) {
             if (ro == 0 && co == 0) { continue; }   // ur back on this square so skip
             // if neighbor is in bounds
             if (r_+ro >= 0 && c_+co >= 0 && r_+ro < b_->rows && c_+co < b_->cols) {
-                // dig it
-                b_->state[(r_+ro)*b_->cols+(c_+co)] = dug;
                 // recurse if needed
-                if (b_->counts[(r_+ro)*b_->cols+(c_+co)] == 0) { ClearEmpty(b_, r_+ro, c_+co); }
+                if ((b_->counts[(r_+ro)*b_->cols+(c_+co)] == 0) &&
+                    (b_->state[(r_+ro)*b_->cols+(c_+co)] == dirt)) {
+                    b_->state[(r_+ro)*b_->cols+(c_+co)] = dug;  // dig before you recurse to stop infiniteness
+                    ClearEmpty(b_, r_+ro, c_+co);
+                }
+                b_->state[(r_+ro)*b_->cols+(c_+co)] = dug;  // dig to reveal numbers
             }
         }
     }

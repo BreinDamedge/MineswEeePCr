@@ -66,7 +66,7 @@ haven't worked on this in a while. okay so now I have the `state` attribute of t
 A simple game loop is going now, so you can dig spaces. next things to add are:
 # TODO
 - [x] flag placing
-- [ ] clear connected spaces w/count == 0
+- [x] clear connected spaces w/count == 0
 - [x] initialize board after first break to make sure you don't break a bomb on your first move
 - [ ] tuibox? to add tui functionality at the end of the project.
 
@@ -107,3 +107,4 @@ for each neighbor
 start w/recurrsion bc it's easier to implement, then make it fast w/a stack if you care.
 TODO: fix bug where no clear on initial break bc the bombs aren't placed yet. (trigger ClearEmpty() in initialize board should do the trick)
 okie dokie I "fixed it" but now I'm seg faulting.
+okie dokie again I fixed the seg fault. checking that one off the list. now I'm realizing I don't have any check for the win condition. so you can only lose. I'll fix that next.
