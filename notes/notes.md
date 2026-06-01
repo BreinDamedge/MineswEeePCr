@@ -108,3 +108,5 @@ start w/recurrsion bc it's easier to implement, then make it fast w/a stack if y
 TODO: fix bug where no clear on initial break bc the bombs aren't placed yet. (trigger ClearEmpty() in initialize board should do the trick)
 okie dokie I "fixed it" but now I'm seg faulting.
 okie dokie again I fixed the seg fault. checking that one off the list. now I'm realizing I don't have any check for the win condition. so you can only lose. I'll fix that next.
+
+I've fallen down a rabbit hole all because I wanted a prettier terminal (sorry tty3) and now I'm setting up openbox. I'll add a file for notes on that.

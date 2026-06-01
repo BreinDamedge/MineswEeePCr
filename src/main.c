@@ -49,12 +49,21 @@ int main() {
         } else if (M == 'd') {
             if (b->bombed){
                 if (Dig(b, R, C)) {
+                    // loss
                     Reveal(b);
                     clearScreen();
-                    printf("You Lose :[\n");
+                    printf("You Lose. :[\n");
                     PrintBoard(b);
                     break;
                 } 
+                if (b->numDirt == 0 && b->flags == 0) {
+                    // win
+                    clearScreen();
+                    printf("You Win!!! :]\n");
+                    PrintBoard(b);
+                    break;
+
+                }
             } else {
                 InitializeBombs(b, R, C);
             }

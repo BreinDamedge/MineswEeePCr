@@ -52,6 +52,7 @@ Board* MakeBoard(int r_, int c_, int numBombs_) {
     newBoard->cols  = c_;
     newBoard->bombs = numBombs_;
     newBoard->flags = numBombs_;
+    newBoard->numDirt = r_*c_-numBombs_;
     newBoard->bombed = false;
 
     // make the bar (used in PrintBoard()
@@ -107,6 +108,7 @@ void InitializeBombs(Board* b_, int r0_, int c0_) {
 
    // mark r/c0 as dug 
    b_->state[r0_*b_->cols+c0_] = dug;
+   b_->numDirt--;
    // mark the bombs as initialized
    b_->bombed = true;
    if (b_->counts[r0_*b_->cols+c0_] == 0) { ClearEmpty(b_, r0_, c0_); }
@@ -162,13 +164,18 @@ void ClearEmpty(Board* b_, int r_, int c_) {
                 if ((b_->counts[(r_+ro)*b_->cols+(c_+co)] == 0) &&
                     (b_->state[(r_+ro)*b_->cols+(c_+co)] == dirt)) {
                     b_->state[(r_+ro)*b_->cols+(c_+co)] = dug;  // dig before you recurse to stop infiniteness
+                    b_->numDirt--;
                     ClearEmpty(b_, r_+ro, c_+co);
                 }
-                b_->state[(r_+ro)*b_->cols+(c_+co)] = dug;  // dig to reveal numbers
+                if (b_->state[(r_+ro)*b_->cols+(c_+co)] == dirt) {
+                    b_->state[(r_+ro)*b_->cols+(c_+co)] = dug;  // dig to reveal numbers
+                    b_->numDirt--;
+                }
             }
         }
     }
 }
+
 
 void Reveal(Board* b_) {
     for (int i = 0; i < b_->rows*b_->cols; i++) {
