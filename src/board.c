@@ -129,7 +129,10 @@ int Dig(Board* b_, int r_, int c_) {
         // TODO some message to let you know that you've dug a spot that's already flagged
         return 0;
     }
-    b_->state[b_->cols*r_+c_] = dug;
+    if (b_->state[b_->cols*r_+c_] == dirt) {
+        b_->state[b_->cols*r_+c_] = dug;
+        b_->numDirt--;
+    }
     if (b_->counts[b_->cols*r_+c_] == 0 ) { ClearEmpty(b_, r_, c_); }
     return b_->counts[b_->cols*r_+c_] == BOMB;
 }
@@ -139,11 +142,13 @@ int Dig(Board* b_, int r_, int c_) {
 int Mark(Board* b_, int r_, int c_) {
     if (b_->state[b_->cols*r_+c_] == flag) {
         b_->flags++;
+        b_->numDirt--;
         b_->state[b_->cols*r_+c_] = dirt;
         return 0;
     } else {
         if (b_->flags > 0) {
             b_->flags--;
+            b_->numDirt++;
             b_->state[b_->cols*r_+c_] = flag;
             return 0;
         }

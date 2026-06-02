@@ -16,4 +16,6 @@ added `export TERMINAL="konsole"` to `~/.config/openbox/autostart`
 this works. doesn't work w/kitty but that's honestly fine.
 
 # Getting a Background
+setting the desktop background with `feh`. `feh --bg-scale /path/to/wallpaper` (--bg-fill will crop instead of stretch). add this to autostart.
+
 # Getting rid of Konsole's scroll bar 

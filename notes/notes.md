@@ -110,3 +110,19 @@ okie dokie I "fixed it" but now I'm seg faulting.
 okie dokie again I fixed the seg fault. checking that one off the list. now I'm realizing I don't have any check for the win condition. so you can only lose. I'll fix that next.
 
 I've fallen down a rabbit hole all because I wanted a prettier terminal (sorry tty3) and now I'm setting up openbox. I'll add a file for notes on that.
+
+# Sharing data between computers
+curl + netcat (nc) is a match made in heaven. launch a netcat listener w/ `nc -l -p <port_num>`
+I'm grabbing an image from the internet w/curl: 
+
+# Konsole Notes
+I'm removing the headers and the scroll bar and just so you know if you need to open the settings for Konsole again w/out the header bar it's `Ctrl+Shift+,`.
+okay you did that by making a new profile. Another thing you should do at some point is set `Alt+Space` to open console, but ig you can do that later.
+
+`Ctrl+Shift+(` splits the window left and right, and the other parentheses splits it up and down.
+
+# SDDM Theming
+dig through `etc/sddm.conf` and related files to figure out what your current theme is.
+the default background is at `/usr/share/images/desktop-base/login-background.svg`
+then I'm changing the theme at `/usr/share/sddm/themes/`
+I changed the SDDM background image by putting it at `/usr/share/sddm/themes/debian-breeze/weirdLinuxBg.jpg` and then adding `background=/usr/share/sddm/themes/debian-breeze/weirdLinuxBg.jpg` and `type=image` to the `/usr/share/sddm/themes/debian-breeze/theme.conf`.

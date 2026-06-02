@@ -50,3 +50,6 @@ vim.opt.fillchars = { eob = " " }
 
 -- display datetime in status line right
 vim.opt.statusline = "%<%f %h%m%r%=%-14.(%l,%c%V%) %{strftime('%Y-%m-%d %H:%M')}"
+
+-- setup clipboard
+vim.opt.clipboard = "unnamedplus"
