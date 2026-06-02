@@ -115,6 +115,7 @@ I've fallen down a rabbit hole all because I wanted a prettier terminal (sorry t
 curl + netcat (nc) is a match made in heaven. launch a netcat listener w/ `nc -l -p <port_num>`
 I'm grabbing an image from the internet w/curl: 
 
+# 6.1.2026
 # Konsole Notes
 I'm removing the headers and the scroll bar and just so you know if you need to open the settings for Konsole again w/out the header bar it's `Ctrl+Shift+,`.
 okay you did that by making a new profile. Another thing you should do at some point is set `Alt+Space` to open console, but ig you can do that later.
@@ -126,3 +127,24 @@ dig through `etc/sddm.conf` and related files to figure out what your current th
 the default background is at `/usr/share/images/desktop-base/login-background.svg`
 then I'm changing the theme at `/usr/share/sddm/themes/`
 I changed the SDDM background image by putting it at `/usr/share/sddm/themes/debian-breeze/weirdLinuxBg.jpg` and then adding `background=/usr/share/sddm/themes/debian-breeze/weirdLinuxBg.jpg` and `type=image` to the `/usr/share/sddm/themes/debian-breeze/theme.conf`.
+
+# Back to Misc Notes
+Win condition is working now.
+What now?
+- [ ] input sanitization
+- [ ] bot
+- [ ] nicer ui
+    - [ ] printf, adding numbers
+    - [ ] tuibox
+    - [ ] opengl
+- [ ] testing
+    - [ ] repeatability
+        - [ ] serialize board
+        - [ ] load serialized board
+    - [ ] record games
+        - [ ] storing state
+        - [ ] storing digs
+
+# 6.2.2026
+Adding numbers to the printf output is going to be the easiest next step so I'll work on that.
+

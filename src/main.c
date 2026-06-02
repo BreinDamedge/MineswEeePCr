@@ -26,7 +26,7 @@ int main() {
     // scanf("%d %d", &R, &C);
 
     // initialize the board
-    Board* b = MakeBoard(10, 10, 10);
+    Board* b = MakeBoard(5, 5, 3);
     if (!b) {
         printf("b address is null, exiting.\n");
         return 1;

@@ -9,7 +9,7 @@
 
 void PrintBoard(Board* b_) {
     // print the header --
-    printf("Flags: %d\n", b_->flags);
+    printf("Flags: %d, Dirt: %d\n", b_->flags, b_->numDirt);
 
     // print the grid --
     printf("%s", b_->bar);
@@ -52,7 +52,7 @@ Board* MakeBoard(int r_, int c_, int numBombs_) {
     newBoard->cols  = c_;
     newBoard->bombs = numBombs_;
     newBoard->flags = numBombs_;
-    newBoard->numDirt = r_*c_-numBombs_;
+    newBoard->numDirt = r_*c_;
     newBoard->bombed = false;
 
     // make the bar (used in PrintBoard()
@@ -142,13 +142,13 @@ int Dig(Board* b_, int r_, int c_) {
 int Mark(Board* b_, int r_, int c_) {
     if (b_->state[b_->cols*r_+c_] == flag) {
         b_->flags++;
-        b_->numDirt--;
+        b_->numDirt++;
         b_->state[b_->cols*r_+c_] = dirt;
         return 0;
     } else {
-        if (b_->flags > 0) {
+        if (b_->flags > 0 && b_->state[b_->cols*r_+c_] == dirt) {
             b_->flags--;
-            b_->numDirt++;
+            b_->numDirt--;
             b_->state[b_->cols*r_+c_] = flag;
             return 0;
         }
@@ -171,8 +171,7 @@ void ClearEmpty(Board* b_, int r_, int c_) {
                     b_->state[(r_+ro)*b_->cols+(c_+co)] = dug;  // dig before you recurse to stop infiniteness
                     b_->numDirt--;
                     ClearEmpty(b_, r_+ro, c_+co);
-                }
-                if (b_->state[(r_+ro)*b_->cols+(c_+co)] == dirt) {
+                } else if (b_->state[(r_+ro)*b_->cols+(c_+co)] == dirt) {
                     b_->state[(r_+ro)*b_->cols+(c_+co)] = dug;  // dig to reveal numbers
                     b_->numDirt--;
                 }
