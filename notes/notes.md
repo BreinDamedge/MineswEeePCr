@@ -131,10 +131,10 @@ I changed the SDDM background image by putting it at `/usr/share/sddm/themes/deb
 # Back to Misc Notes
 Win condition is working now.
 What now?
-- [ ] input sanitization
+- [ ] robust input handling
 - [ ] bot
 - [ ] nicer ui
-    - [ ] printf, adding numbers
+    - [x] printf, adding numbers
     - [ ] tuibox
     - [ ] opengl
 - [ ] testing
@@ -151,3 +151,27 @@ Adding numbers to the printf output is going to be the easiest next step so I'll
 # 6.5.2026
 Hi I'm back. so I'm gonna do those numbers and then try to find some documents on safe input handling in c.
 numbers are added. now I need to handle user input safely. this is not a high security application but still I wanna learn.
+
+## Sidequest: Flameshot
+I want screenshot capabilities bc taking pictures with my phone camera is annoying and pics are fun for documenting the process. Gonna install flameshot w/apt, and then configure it to work w/prtScr and I want to also be able to take cropped shots
+Okay what I'm going to do is find a way to bind the `PrtScr` key to launch the flameshot gui by default.
+Looks like the configuration file I'm after for debian + openbox is rc.xml which is an openbox config file (I should really split this whole notes document up into sepratef iles for all the sidequests when this project is done. a devlog file and then extras for the rest) that modifies how I interact w/my windows or smth? unclear atm.
+anyway I modified my user level config at `~/.config/openbox/rc.xml`. It already had a bunch of stuff in it so I searched for the end of the keybinds section and there was one for a screenshot setup w/scrot so I changed:
+```xml
+<!-- Launch scrot when Print is pressed -->
+    <keybind key="Print">
+      <action name="Execute">
+        <command>scrot</command>
+      </action>
+    </keybind>
+```
+to
+```xml
+<!-- Launch flameshot gui when Print is pressed -->
+    <keybind key="Print">
+      <action name="Execute">
+        <command>flameshot gui</command>
+      </action>
+    </keybind>
+```
+and then to test I ran `openbox --reconfigure` tho I think that's in the right click context menu too. it works. wow that worked so well.
