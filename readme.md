@@ -6,6 +6,8 @@ The plan is to make minesweeper in the terminal in c on this thing, and then mak
 This is also a lovely opportunity to learn Neovim without a starting config.
 
 # Minesweeper
-There'll be more to read here as the project develops.
-
 \*max size to be tested is 1000 x 1000 spaces (larger may work but I won't be testing also who's terminal is that big?).
+
+# Building & Running
+if you `cd` into the `src` directory a make file is provided. Running `make` with no target will build the executable w/the name `prg`. running `./prg` will then launch the game.
+

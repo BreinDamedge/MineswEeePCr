@@ -148,3 +148,6 @@ What now?
 # 6.2.2026
 Adding numbers to the printf output is going to be the easiest next step so I'll work on that.
 
+# 6.5.2026
+Hi I'm back. so I'm gonna do those numbers and then try to find some documents on safe input handling in c.
+numbers are added. now I need to handle user input safely. this is not a high security application but still I wanna learn.

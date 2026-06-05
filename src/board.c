@@ -11,10 +11,16 @@ void PrintBoard(Board* b_) {
     // print the header --
     printf("Flags: %d, Dirt: %d\n", b_->flags, b_->numDirt);
 
+    // print the column numbers
+    printf("  ");
+    for (int i = 0; i < b_->cols; i++) { printf(" %i", i%10); }
+    printf("\n");
+
     // print the grid --
-    printf("%s", b_->bar);
+    printf("  %s", b_->bar);
     for (int r = 0; r < b_->rows; r++) {
-        printf("|");
+        // print row numbers
+        printf("%i |", r%10);
         for (int c = 0; c < b_->cols; c++) {
             // printing counts
             if (b_->state[b_->cols*r+c] == dug) {
@@ -40,7 +46,7 @@ void PrintBoard(Board* b_) {
 
         }
         printf("\n");
-        printf("%s", b_->bar);
+        printf("  %s", b_->bar);
     }
 }
 
