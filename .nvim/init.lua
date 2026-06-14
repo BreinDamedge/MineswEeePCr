@@ -53,3 +53,13 @@ vim.opt.statusline = "%<%f %h%m%r%=%-14.(%l,%c%V%) %{strftime('%Y-%m-%d %H:%M')}
 
 -- setup clipboard
 vim.opt.clipboard = "unnamedplus"
+
+-- :nohl on Esc in normal mode, unless you're focused on the netrw window, then it closes that instead
+vim.keymap.set('n', '<Esc>', function()
+    if vim.bo.filetype == "netrw" then
+        vim.cmd("Lexplore")
+    else
+        vim.cmd("nohl")
+        vim.cmd("echo\"\"")
+    end
+end, { desc = "remove hl or close lexplore w/escape" })

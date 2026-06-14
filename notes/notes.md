@@ -131,8 +131,15 @@ I changed the SDDM background image by putting it at `/usr/share/sddm/themes/deb
 # Back to Misc Notes
 Win condition is working now.
 What now?
+TODO:
+- [ ] larger neighborhood of empty space around initial break
 - [ ] robust input handling
+    - [ ] fgets() + sscanf()
+    - [ ] terminal history
 - [ ] bot
+    - [ ] design
+    - [ ] implement
+    - [ ] validate (use testing framework)
 - [ ] nicer ui
     - [x] printf, adding numbers
     - [ ] tuibox
@@ -175,3 +182,60 @@ to
     </keybind>
 ```
 and then to test I ran `openbox --reconfigure` tho I think that's in the right click context menu too. it works. wow that worked so well.
+I bet this thing could run an irc client. Been wanting to build one. Could be a fun next project.
+
+okay I'm back and while I remember how I am going to add a keyboard shortcut to open a terminal window (`Alt+Space`). it works now.
+
+# 6.7.2026
+We back. I'm going to work on better input today. I did a bit of googling and I'm going to go with a combo of `fgets()` and `sscanf()` to handle input. I'd also like to be able to scroll up and down the history. that should be pretty ez to do. how big of a terminal history to keep? up to you. 5 or 10 should honestly be fine. For `fgets()` you need a max input length too. ~20 should be fine too. magic number it and then you could actually calculate it based on the size of the board and possible command lengths for sure. maybe later.
+
+> [!Note]
+> `Esc` in normal mode will run `:nohl`
+
+Encountered a bug where I didn't win after marking all the bombs while showing wings. I believe the issue is caused by marking a spot not triggering a check of the win condition properly. configuration to test in the future once a harness exists is a 5x5 w/bombs at (4,0), (0,3), (0,4), start w/`d 0 0` and then mark all the spots. This should trigger a win condition but it didn't in this test. For now I've moved the check out of dig so it is checked after every action.
+
+because up arrows are captured as characters instead of events I'm not sure how to trigger terminal history off that. Google recommends the GNU Readline library which seems to work perfectly. It's GPL code so I'd need to make sure that the rest of the project is GPL compatible. I have no issue making this GPL but idk if that's allowed if I also use OpenGL (probably a compatible licence tbh because it is OpenGL so it's already opensource but- anyway) we'll have to read about that when we get to that point. it'd be good to learn how to do it from scratch, and also easier to license because I could just do the CC0 license or something as long as that's not a legal issue w/any other information/code in here. I am not a lawyer, can you tell?
+
+if I am to do the terminal history stuff from scratch, one option might be with `termios.h` which should work for POSIX systems (this is linux so yay) at least. I'm reading about switching the terminal from canonical mode to raw mode- will I have to switch it back on a `^C` exit? not sure, read up on that, but while I'm here, how do you write a c program so that it runs cleanup code when you `^C` out of it?
+
+## Running Cleanup Code on ^C
+This uses the `<signal.h>` library. You register a signal handler
+
+# 6.11.2026
+hellooooo!!! I want a lock screen. Gonna install `slock` and then set up `rc.xml` with a `Super+L` shortcut.
+
+# 6.13.2026
+hellooo!!! I should work on coding instead of on my config. I was gonna set up block commenting but ya know what no. not rn. I realize now that lsps would be needed to comment based on detected language probably and I'm not gonna do that rn. you could do some bot designing. yeah sure.
+
+What are some options? The first method that comes to mind is to scan every square that has been dug and create a sort of map (not the data structure kind, more of a heat map. you might be able to use a summed score sort of situation where for each visible number you then put the total probability for all undug spots nearby. let's see let's try and draw it:
+
+     game        probs
+    +-+-+-+     +-+-+-+
+    |X|.| |     |p|p| |  in this case p = 1/3. I wrote it like that bc formatting this ascii art... yeah I'll make it bigger
+    +-+-+-+     +-+-+-+
+    |.|1| |     |p| | |
+    +-+-+-+     +-+-+-+
+    | | | |     | | | |
+    +-+-+-+     +-+-+-+
+
+and then once you've made you map this way can anytime that a spot has p >= 1.0 you can flag it then and there and then restart.
+p for each tile around a number tile w/value n would be n - f / d, where f is the number of flags in the neighborhood around n, and d is the number of dirt tiles.
+
+next todo should be serialization. My wrists hurt :pensive:
+I have switched keyboards. we'll see if this helps at all.
+oh, also cowsay got installed on this machine and now `bat` is an alias that cowsays the battery life.
+oddly enough today it is my right wrist that is hurting. that's good and bad ig.
+
+## Serialization
+boardcfg can be stored in plaintext. I only did fileio like once 3 years ago so this will be fun.
+```
+5 5 3   # r, c, bombCt
+b 3 3   # here's where the bombs are
+...
+d 1 2   # sequence of moves to execute ig
+...
+w/l     # expected state of the game after these moves have been executed
+```
+
+how do I read this? do I do it one line at a time? with like sscanf or smth leeet's google it.
+

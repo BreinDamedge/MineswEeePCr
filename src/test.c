@@ -1,5 +1,5 @@
-/* 6.7.2026 - MineswEeePCr - main.c
- * here's our lovely little minesweeper project
+/* 6.13.2026 - MineswEeePCr - test.c
+ * test file reading serialized games
  */
 
 #include <stdio.h>

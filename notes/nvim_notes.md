@@ -32,3 +32,6 @@ so I didn't change my leader key, I changed my window commands "leader" thing fr
 ## netrw
 uhnide dotfiles with `gh`
 
+## Backing up your config
+you've been backing it up to the `.nvim/` folder of this project as you go. The command if you're feeling lazy in the future is as follows: `cp ~/.config/nvim/init.lua .nvim/init.lua` and you should run it from the base of the minesweeper project.
+
