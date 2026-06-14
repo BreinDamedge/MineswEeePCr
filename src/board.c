@@ -1,13 +1,13 @@
 #include "board.h"
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX_BAR 2048
+#define MAX_CONFIG_LINE_LENGTH 32
 #define BOMB -1
 
 
 
 
-void PrintBoard(Board* b_) {
+void PrintBoard(const Board* b_) {
     // print the header --
     printf("Flags: %d, Dirt: %d\n", b_->flags, b_->numDirt);
 
@@ -51,7 +51,7 @@ void PrintBoard(Board* b_) {
 }
 
 
-Board* MakeBoard(int r_, int c_, int numBombs_) {
+Board* MakeBoard(const int r_, const int c_, const int numBombs_) {
     Board* newBoard = malloc(sizeof(Board));
     if (!newBoard) { return NULL; }
     newBoard->rows  = r_;
@@ -84,7 +84,7 @@ Board* MakeBoard(int r_, int c_, int numBombs_) {
 
 
 // r/c0_ are the location of the first broken spot.
-void InitializeBombs(Board* b_, int r0_, int c0_) {
+void InitializeBombs(Board* b_, const int r0_, const int c0_) {
     int r, c;
     for (int _ = 0; _ < b_->bombs; _++) {
         // random x & y
@@ -130,7 +130,7 @@ void FreeBoard(Board** b_) {
 
 
 // modify the state val at r_ c_. return 0 unless you dug a bomb, then return 1
-int Dig(Board* b_, int r_, int c_) {
+int Dig(Board* b_, const int r_, const int c_) {
     if (b_->state[b_->cols*r_+c_] == flag) {
         // TODO some message to let you know that you've dug a spot that's already flagged
         return 0;
@@ -145,7 +145,7 @@ int Dig(Board* b_, int r_, int c_) {
 
 
 // modify the state val at r_ c_ to add a flag. return 0 unless you are out of flags
-int Mark(Board* b_, int r_, int c_) {
+int Mark(Board* b_, const int r_, const int c_) {
     if (b_->state[b_->cols*r_+c_] == flag) {
         b_->flags++;
         b_->numDirt++;
@@ -163,7 +163,7 @@ int Mark(Board* b_, int r_, int c_) {
 }
 
 
-void ClearEmpty(Board* b_, int r_, int c_) {
+void ClearEmpty(Board* b_, const int r_, const int c_) {
     // only enter this function if counts at r_ c_ is 0
     // loop through neighbors
     for (int ro = -1; ro < 2; ro++) {
@@ -193,3 +193,18 @@ void Reveal(Board* b_) {
     }
 }
 
+
+// void LoadBoardCfg(Board* b_, const char* fname_) {
+//     FILE *f;
+//     char buff[MAX_CONFIG_LINE_LENGTH];
+//     f = fopen(fname_, "r");
+//     if (file == NULL) {
+//         // handle error ...
+//     }
+// 
+//     while (fgets(buff, MAX_CONFIG_LINE_LENGTH, f) != NULL) {
+//         
+//     }
+// 
+//     fclose(f);
+//}

@@ -9,17 +9,18 @@ typedef struct {
 } Board;
 
 
-void PrintBoard(Board* b_);
+void PrintBoard(const Board* b_);
 
-Board* MakeBoard(int r_, int c_, int numBombs_);
-void InitializeBombs(Board* b_, int r0_, int c0_);
+Board* MakeBoard(const int r_, const int c_, const int numBombs_);
+void InitializeBombs(Board* b_, const int r0_, const int c0_);
 
 void FreeBoard(Board** b_);
 
-int Dig(Board* b_, int r_, int c_);
-int Mark(Board* b_, int r_, int c_);
-void ClearEmpty(Board* b_, int r_, int c_);
+int Dig(Board* b_, const int r_, const int c_);
+int Mark(Board* b_, const int r_, const int c_);
+void ClearEmpty(Board* b_, const int r_, const int c_);
 
 
 void Reveal(Board* b_);
 
+// void LoadBoardCfg(Board* b_, const char* fname_);
