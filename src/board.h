@@ -23,4 +23,4 @@ void ClearEmpty(Board* b_, const int r_, const int c_);
 
 void Reveal(Board* b_);
 
-// void LoadBoardCfg(Board* b_, const char* fname_);
+Board* LoadBoardCfg(const char* fname_);

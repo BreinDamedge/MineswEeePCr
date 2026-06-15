@@ -194,17 +194,28 @@ void Reveal(Board* b_) {
 }
 
 
-// void LoadBoardCfg(Board* b_, const char* fname_) {
-//     FILE *f;
-//     char buff[MAX_CONFIG_LINE_LENGTH];
-//     f = fopen(fname_, "r");
-//     if (file == NULL) {
-//         // handle error ...
-//     }
-// 
-//     while (fgets(buff, MAX_CONFIG_LINE_LENGTH, f) != NULL) {
-//         
-//     }
-// 
-//     fclose(f);
-//}
+/* read a board config file and then return a Board* with those bombs and stuff. */
+Board* LoadBoardCfg(const char* fname_) {
+    FILE *f;
+    char buff[MAX_CONFIG_LINE_LENGTH];
+    bool firstLine = true;
+    Board* b;
+    f = fopen(fname_, "r");
+    if (file == NULL) { /* handle error ... */ }
+    int r, c, bombs;
+    while (fgets(buff, MAX_CONFIG_LINE_LENGTH, f) != NULL) {
+        if (firstLine) {
+            sscanf(buff, "%d %d %d", &r, &c, &bombs);
+            b = MakeBoard(r, c, bombs);
+            firstLine = false;
+        } else {
+            // ...
+            sscanf(buff, "%d %d", &rows, &cols);
+            // set bombs up...
+            b->counts[rows*b->cols+cols] = BOMB;
+        }
+    }
+    fclose(f);
+    // initialize the counts
+
+}

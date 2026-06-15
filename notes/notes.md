@@ -239,3 +239,8 @@ w/l     # expected state of the game after these moves have been executed
 
 how do I read this? do I do it one line at a time? with like sscanf or smth leeet's google it.
 
+# 6.14.2026
+aaaaaalrighty back to serialization. no sequence of moves yet. The board config and the move sequences should be in different files.
+
+# 6.15.2026
+you serialized a bit more. time to work (job) now. Next task to finish is splitting the initialize counts function out from the InitializeBombs() call. might suggest splitting that into an PlaceRandomBombs() function. Anyway sign out now.
